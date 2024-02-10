@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Podcast Library</h1>
+	
+	<h3>Streaming Services</h3>
+	<table th:if="${streamingServiceList != null and !streamingServiceList.empty}">
+		<tr>
+			<th>Name</th>
+			<th>Link</th>
+		</tr>
+		<tr th:each="a : ${streamingServiceList}">
+			<td th:text="${a.name}">name</td>
+			<td th:text="${a.link}">link</td>
+		</tr>
+	</table>
+	
+	<h3>Podcasts</h3>
+	<table th:if="${podcastList != null and !podcastList.empty}">
+		<tr>
+			<th>Title</th>
+			<th>Release Year</th>
+			<th>Rating</th>
+			<th>Link</th>
+			<th>Streaming Service</th>
+		</tr>
+		<tr th:each="a : ${podcastList}">
+			<td th:text="${a.title}">name</td>
+			<td th:text="${a.releaseyear}">link</td>
+			<td th:text="${a.starRating}">link</td>
+			<td th:text="${a.link}">link</td>
+			<td th:text="${a.streamingService}">link</td>
+		</tr>
+	</table>
+	
+	<h3>Add Podcasts</h3>
+	<form method="post" action="/addPodcast" th:object="${podcast}">
+		<input type="hidden" th:field="*{id}" /> 
+		Title: <input type="text" th:field="*{title}" /><br> 
+		Release Year: <input type="number" th:field="*{releaseyear}" /><br> 
+		Star Rating: <input type="number" th:field="*{starRating}" /><br> 
+		Link: <input type="text" th:field="*{link}" /><br> 
+		Streaming Service: 
+		<select name="streamingServiceId">
+			<option th:each="p : ${streamingServiceList}" th:value="${p.id}" th:text="${p.name}" />
+		</select> <br> 
+		<input type="submit" value="Add Podcast!" />
+	</form>
+	
+	<h3>Streaming Service</h3>
+	<form method="post" action="/addstreamingService" th:object="${streamingService}">
+		<input type="hidden" th:field="*{id}" /> 
+		Name: <input type="text" th:field="*{name}" /><br> 
+		Link: <input type="text" th:field="*{link}" /><br> 
+		<input type="submit" value="Add Streaming Service!" />
+	</form>
+</body>
+</html>
