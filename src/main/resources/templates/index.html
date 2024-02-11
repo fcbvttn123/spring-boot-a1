@@ -12,10 +12,12 @@
 		<tr>
 			<th>Name</th>
 			<th>Link</th>
+			<th>&nbsp;</th>
 		</tr>
 		<tr th:each="a : ${streamingServiceList}">
 			<td th:text="${a.name}">name</td>
 			<td th:text="${a.link}">link</td>
+			<td><a th:href="@{/deleteStreamingService/} + ${a.id}">Delete</a></td>
 		</tr>
 	</table>
 	
@@ -27,6 +29,7 @@
 			<th>Rating</th>
 			<th>Link</th>
 			<th>Streaming Service</th>
+			<th>&nbsp;</th>
 		</tr>
 		<tr th:each="a : ${podcastList}">
 			<td th:text="${a.title}">name</td>
@@ -34,6 +37,7 @@
 			<td th:text="${a.starRating}">link</td>
 			<td th:text="${a.link}">link</td>
 			<td th:text="${a.streamingService}">link</td>
+			<td><a th:href="@{/deletePodcast/} + ${a.id}">Delete</a></td>
 		</tr>
 	</table>
 	

@@ -26,6 +26,7 @@ public class BoostrapData implements CommandLineRunner {
 				.starRating(4)
 				.link("Link")
 				.streamingService("Apple Podcasts")
+				.streamingServiceId(Long.valueOf(2))
 				.build();	
 		Podcast p2 = Podcast.builder()
 				.title("Serial")
@@ -33,6 +34,7 @@ public class BoostrapData implements CommandLineRunner {
 				.starRating(2)
 				.link("Link")
 				.streamingService("Google Podcasts")
+				.streamingServiceId(Long.valueOf(3))
 				.build();
 		Podcast p3 = Podcast.builder()
 				.title("The Daily")
@@ -40,6 +42,7 @@ public class BoostrapData implements CommandLineRunner {
 				.starRating(5)
 				.link("Link")
 				.streamingService("Spotify")
+				.streamingServiceId(Long.valueOf(1))
 				.build();
 	
 		StreamingService s1 = StreamingService.builder()

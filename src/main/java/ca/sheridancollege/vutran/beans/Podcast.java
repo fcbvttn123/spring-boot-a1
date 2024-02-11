@@ -22,5 +22,6 @@ public class Podcast {
 	private int releaseyear;
 	private int starRating;
 	private String streamingService;
+	private Long streamingServiceId;
 	private String link;
 }
