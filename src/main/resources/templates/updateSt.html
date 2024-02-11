@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Update Streaming Service</h1>
+	<form method="post" action="/updateStreamingService" th:object="${st}">
+		<input type="hidden" th:field="*{id}" /> 
+		Name: <input type="text" th:field="*{name}" /><br> 
+		Link: <input type="text" th:field="*{link}" /><br> 
+		<input type="submit" value="Update!" />
+	</form>
+</body>
+</html>
