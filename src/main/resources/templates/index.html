@@ -8,6 +8,7 @@
 	<h1>Podcast Library</h1>
 	
 	<h3>Streaming Services</h3>
+	<p>If you remove a service, all podcasts of that service will be removed</p>
 	<table th:if="${streamingServiceList != null and !streamingServiceList.empty}">
 		<tr>
 			<th>Name</th>
@@ -27,7 +28,7 @@
 	<table th:if="${podcastList != null and !podcastList.empty}">
 		<tr>
 			<th>Title</th>
-			<th>Release Year</th>
+			<th><a href="/sort">Release Year (Click to sort)</a></th>
 			<th>Rating</th>
 			<th>Link</th>
 			<th>Streaming Service</th>

@@ -33,6 +33,15 @@ public class HomeController {
 		return "index";
 	}
 	
+	@GetMapping("/sort")
+	public String sortPodcastIndexHTML(Model model) {
+		model.addAttribute("podcast", new Podcast());
+		model.addAttribute("streamingService", new StreamingService());
+		model.addAttribute("podcastList", pr.findByOrderByReleaseyearDesc());
+		model.addAttribute("streamingServiceList", sr.findAll());
+		return "index";
+	}
+	
 	@GetMapping("/deleteStreamingService/{id}")
 	public String deleteStreamingService(Model model, @PathVariable("id") Long id) {
 		sr.deleteById(id);
@@ -84,6 +93,9 @@ public class HomeController {
 		StreamingService updatedSt = mySt.get();
 		updatedSt.setName(st.getName());
 		updatedSt.setLink(st.getLink());
+		for(Podcast p: updatedSt.getPodcastList()) {
+			p.setStreamingService(st.getName());
+		}
 		sr.save(updatedSt);
 		
 		model.addAttribute("podcast", new Podcast());
@@ -102,12 +114,25 @@ public class HomeController {
 	
 	@PostMapping("/updatePodcast") 
 	public String updatePodcastFormSubmission(Model model, @ModelAttribute Podcast podcast) {
+		// remove podcast from current ss 
+			// get current ss 
+			StreamingService currentSS = sr.findByPodcastListId(podcast.getId());
+			// remove podcast from list  
+			currentSS.getPodcastList().remove(pr.findById(podcast.getId()).get());
+		// update podcast to new ss
+			// get new ss 
+			StreamingService newSS = sr.findById(podcast.getStreamingServiceId()).get();
+			// update podcast to list 
+			newSS.getPodcastList().add(podcast);
+		
 		Optional<Podcast> myPodcast = pr.findById(podcast.getId());
 		Podcast updatedPodcast = myPodcast.get();
 		updatedPodcast.setLink(podcast.getLink());
 		updatedPodcast.setReleaseyear(podcast.getReleaseyear());
 		updatedPodcast.setStarRating(podcast.getStarRating());
 		updatedPodcast.setTitle(podcast.getTitle());
+		updatedPodcast.setStreamingServiceId(podcast.getStreamingServiceId());
+		updatedPodcast.setStreamingService(sr.findById(podcast.getStreamingServiceId()).get().getName());
 		pr.save(updatedPodcast);
 		
 		model.addAttribute("podcast", new Podcast());

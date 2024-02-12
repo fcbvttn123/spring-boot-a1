@@ -8,4 +8,5 @@ import ca.sheridancollege.vutran.beans.Podcast;
 
 public interface PodcastRepo extends JpaRepository<Podcast, Long> {
 	public List<Podcast> findByStreamingServiceId(Long id);
+	public List<Podcast> findByOrderByReleaseyearDesc();
 }
